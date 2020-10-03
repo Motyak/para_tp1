@@ -1,6 +1,8 @@
 #include <iostream>
 #include <thread>
 
+#include "RandSqMatrix.h"
+
 float* prodSeq(float* m1, float* m2, int w, int h) 
 // float** prodSeq(float** a, float** b, int dim)
 { 
@@ -35,50 +37,14 @@ float* prodSeq(float* m1, float* m2, int w, int h)
     return m1xm2;
 }
 
-// g++ src/exo2.cpp --std=c++11 -lpthread
+// g++ -o bin/exo2 src/RandSqMatrix.cpp src/exo2.cpp --std=c++11 -lpthread
 int main()
 {
-    float m1[] = { 
-        1.f, 2.f, 3.f, 
-        4.f, 5.f, 6.f, 
-        7.f, 8.f, 9.f
-    };
-    float m2[] = { 
-        2.f, 2.f, 2.f, 
-        2.f, 2.f, 2.f, 
-        2.f, 2.f, 2.f 
-    };
+    const int DIM = 3;
 
-    // float m1[3][3] = { 
-    //     {1.f, 2.f, 3.f}, 
-    //     {4.f, 5.f, 6.f}, 
-    //     {7.f, 8.f, 9.f} 
-    // };
-    // float m2[3][3] = { 
-    //     {2.f, 2.f, 2.f}, 
-    //     {2.f, 2.f, 2.f}, 
-    //     {2.f, 2.f, 2.f} 
-    // };
+    RandSqMatrix m(DIM);
 
-	float* res = prodSeq(m1, m2, 3, 3);
-    // float** res = prodSeq((float**)m1, (float**)m2, 3);
-
-    // affichage resultat
-    for(int i = 0 ; i < 3 * 3 ; ++i)
-    {
-        std::cout << res[i] << "\t";
-        if((i+1) % 3 == 0)
-            std::cout << std::endl;
-    }
-
-    // for(int i = 0 ; i < 3 ; ++i)
-    // {
-    //     for(int j = 0 ; j < 3 ; ++j)
-    //         std::cout << res[i][j] << "\t";
-    //     std::cout<<std::endl;
-    // }
-
-    delete(res);
+    std::cout<<m;
 
 	return 0;
 }

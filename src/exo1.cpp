@@ -3,7 +3,7 @@
 
 void sayHello() { std::cout<<"Hello World"<<std::endl; }
 
-// g++ f.cpp --std=c++11 -lpthread
+// g++ -o bin/exo1 src/exo1.cpp --std=c++11 -lpthread
 int main()
 {
 	std::thread t1(sayHello);

@@ -1,0 +1,68 @@
+#include "RandSqMatrix.h"
+
+#include <random>   //std::random_device
+
+RandSqMatrix::RandSqMatrix(const int& dim)
+{
+    std::random_device random;
+    this->dim = dim;
+    this->randomContent = new float*[dim];
+    for(int i = 0 ; i < dim ; ++i)
+    {
+        this->randomContent[i] = new float[dim];
+        for(int j = 0 ; j < dim ; ++j)
+            this->randomContent[i][j] = random() % 100;
+    }
+
+    this->strategy = new Sequentially();
+}
+
+RandSqMatrix::~RandSqMatrix()
+{
+    for(int i = 0 ; i < this->dim ; ++i)
+        delete(this->randomContent[i]);
+    delete(this->randomContent);
+    delete(this->strategy);
+}
+
+void RandSqMatrix::setStrategy(Strategy* strategy)
+{
+    delete(this->strategy);
+    this->strategy = strategy;
+}
+
+float* RandSqMatrix::operator[](const int& i) const
+{
+    return this->randomContent[i];
+}
+
+std::ostream& operator<<(std::ostream& os, const RandSqMatrix& m)
+{
+    for(int i = 0 ; i < m.dim ; ++i)
+    {
+        for(int j = 0 ; j < m.dim ; ++j)
+            os<<m[i][j]<<"\t";
+        os<<std::endl;
+    }
+    return os;
+}
+
+RandSqMatrix RandSqMatrix::operator*(const RandSqMatrix& m) const
+{
+    return this->strategy->multiply(*this, m);
+}
+
+RandSqMatrix Sequentially::multiply(const RandSqMatrix& m1, const RandSqMatrix& m2) const
+{
+    
+}
+
+RandSqMatrix ByValue::multiply(const RandSqMatrix& m1, const RandSqMatrix& m2) const
+{
+
+}
+
+RandSqMatrix ByBlocks::multiply(const RandSqMatrix& m1, const RandSqMatrix& m2) const
+{
+
+}
