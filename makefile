@@ -2,7 +2,7 @@ CC=g++
 CFLAGS=--std=c++11 -lpthread
 # SRC=
 EXEC=bin/exo1 bin/exo2 bin/exo3 bin/exo4 bin/exo5
-DIRS=bin bin/numbers bin/text bin/attaques
+DIRS=bin
 
 all: $(EXEC)
 
