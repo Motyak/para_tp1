@@ -20,8 +20,10 @@ RandSqMatrix::RandSqMatrix(const int& dim)
 RandSqMatrix::~RandSqMatrix()
 {
     for(int i = 0 ; i < this->dim ; ++i)
-        delete(this->randomContent[i]);
-    delete(this->randomContent);
+        // delete this->randomContent[i];
+        delete[] this->randomContent[i];
+
+    // delete[] this->randomContent;
     delete(this->strategy);
 }
 
